@@ -24,7 +24,8 @@
         layout,
         bounds,
         pages = [],
-        PADDING = 10,
+        PADDING_HORIZONTAL = 0,
+        PADDING_VERTICAL = 0,
         isSetup = false;
 
     IDR.setup = function (config) {
@@ -36,6 +37,9 @@
 
         bounds = config.bounds;
         pgCount = config.pagecount;
+
+        PADDING_HORIZONTAL = config.PADDING_HORIZONTAL ? config.PADDING_HORIZONTAL : 0;
+        PADDING_VERTICAL = config.PADDING_VERTICAL ? config.PADDING_VERTICAL : 0;
 
         // Validate starting page
         if (curPg < 1 || curPg > pgCount) {
@@ -57,7 +61,10 @@
         pageContainer.id = "contentContainer";
         pageContainer.style.overflow = "hidden";
         pageContainer.style.transform = "translateZ(0)";
-        pageContainer.style.padding = (PADDING / 2) + "px";
+        pageContainer.style.paddingLeft = (PADDING_HORIZONTAL / 2) + "px";
+        pageContainer.style.paddingRight = (PADDING_HORIZONTAL / 2) + "px";
+        pageContainer.style.paddingTop = (PADDING_VERTICAL / 2) + "px";
+        pageContainer.style.paddingBottom = (PADDING_VERTICAL / 2) + "px";
         contain.appendChild(pageContainer);
 
         for (var i = 1; i <= pgCount; i++) {
@@ -645,7 +652,7 @@
             var zoom = ZoomManager.getZoom();
             var pageWidth = Math.floor(bounds[curPg - 1][0] * zoom);
             var marginLeft = 0;
-            var viewPortWidth = (mainContainer.clientWidth - PADDING);
+            var viewPortWidth = (mainContainer.clientWidth - PADDING_HORIZONTAL);
             if (viewPortWidth > pageWidth) {
                 marginLeft = (viewPortWidth - pageWidth) / 2;
             } else {
@@ -654,7 +661,7 @@
 
             var pageHeight = Math.floor(bounds[curPg - 1][1] * zoom);
             var marginTop = 0;
-            var viewPortHeight = (mainContainer.clientHeight - PADDING);
+            var viewPortHeight = (mainContainer.clientHeight - PADDING_VERTICAL);
             if (viewPortHeight > pageHeight) {
                 marginTop = (viewPortHeight - pageHeight) / 2;
             } else {
@@ -800,7 +807,7 @@
             var pageWidthA = Math.floor(bounds[curPg - 1][0] * zoom);
             var pageWidthB = isTwoPages ? Math.floor(bounds[curPg][0] * zoom) : pageWidthA;
             var pageWidth = 2 * Math.max(pageWidthA, pageWidthB);
-            var viewPortWidth = Math.max(pageWidth, mainContainer.clientWidth - PADDING);
+            var viewPortWidth = Math.max(pageWidth, mainContainer.clientWidth - PADDING_HORIZONTAL);
 
             var centerX = Math.floor(viewPortWidth / 2);
             var marginLeftA = centerX;
@@ -815,7 +822,7 @@
             // Calculate top margins & viewPortHeight
             var pageHeightA = Math.floor(bounds[curPg - 1][1] * zoom);
             var pageHeightB = isTwoPages ? Math.floor(bounds[curPg][1] * zoom) : pageHeightA;
-            var viewPortHeight = Math.max(pageHeightA, pageHeightB, mainContainer.clientHeight - PADDING);
+            var viewPortHeight = Math.max(pageHeightA, pageHeightB, mainContainer.clientHeight - PADDING_VERTICAL);
             var marginTopA = Math.floor((viewPortHeight - (isDirectionR2L ? pageHeightB : pageHeightA)) / 2);
             var marginTopB = Math.floor((viewPortHeight - (isDirectionR2L ? pageHeightA : pageHeightB)) / 2);
 
@@ -968,7 +975,7 @@
             }
 
             var zoom = ZoomManager.getZoom();
-            mainContainer.scrollTop = pages[pg].offsetTop - (PADDING / 2) + (offset * zoom);
+            mainContainer.scrollTop = pages[pg].offsetTop - (PADDING_VERTICAL / 2) + (offset * zoom);
             LayoutManager.updatePage(pg);
             setVisiblePages();
         };
@@ -991,7 +998,7 @@
         };
 
         Continuous.getAutoZoom = function(fitWidth) {
-            if (Continuous.getZoomBounds().width > mainContainer.clientWidth - PADDING) {
+            if (Continuous.getZoomBounds().width > mainContainer.clientWidth - PADDING_HORIZONTAL) {
                 return fitWidth;
             } else {
                 return 1;
@@ -1255,8 +1262,8 @@
 
         var calculateZoomValue = function(value) {
             var zoomBounds = layout.getZoomBounds();
-            var fitWidthZoom = (mainContainer.clientWidth - PADDING) / zoomBounds.width;
-            var fitHeightZoom = (mainContainer.clientHeight - PADDING) / zoomBounds.height;
+            var fitWidthZoom = (mainContainer.clientWidth - PADDING_HORIZONTAL) / zoomBounds.width;
+            var fitHeightZoom = (mainContainer.clientHeight - PADDING_VERTICAL) / zoomBounds.height;
 
             var zoomValue = parseFloat(value);
             if (!isNaN(zoomValue)) {
