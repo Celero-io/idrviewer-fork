@@ -253,7 +253,7 @@
                 "limitOnePerPage": data.settings.limitOnePerPage
             };
 
-            let pages = document.getElementsByClassName("page");
+            let pages = document.getElementsByClassName("idrviewer-page");
 
             for (let i = 0; i < pages.length; i++) {
                 let page = pages[i];

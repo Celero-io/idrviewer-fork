@@ -23,10 +23,10 @@
         };
 
         var initPage = function(page) {
-            var pageContainer = document.getElementById("page" + page);
+            var pageContainer = document.getElementById("idrviewer-page" + page);
 
             var annotationsContainer = document.createElement("div");
-            annotationsContainer.className = "page-inner";
+            annotationsContainer.className = "idrviewer-page-inner";
             annotationsContainer.setAttribute("style", "position: absolute; pointer-events: none;");
             annotationsContainer.style.width = pageContainer.style.width;
             annotationsContainer.style.height = pageContainer.style.height;

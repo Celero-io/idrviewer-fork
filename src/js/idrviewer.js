@@ -69,9 +69,9 @@
 
         for (var i = 1; i <= pgCount; i++) {
             var page = document.createElement('div');
-            page.id = 'page' + i;
+            page.id = 'idrviewer-page' + i;
             page.setAttribute('style', 'width: ' + bounds[i - 1][0] + 'px; height: ' + bounds[i - 1][1] + 'px;');
-            page.className = "page";
+            page.className = "idrviewer-page";
             pageContainer.appendChild(page);
             pages[i] = page;
         }
@@ -177,7 +177,7 @@
 
         var iframeLoad = function(page, callback) {
             var iframe = document.createElement('iframe');
-            iframe.setAttribute('class', 'page-inner');
+            iframe.setAttribute('class', 'idrviewer-page-inner');
             iframe.setAttribute('src', URL + page + '.html');
             iframe.setAttribute('style', 'width: ' + bounds[page - 1][0] + 'px; height: ' + bounds[page - 1][1] + 'px; position: absolute; border: 0;');
             iframe.onload = callback;
@@ -202,7 +202,7 @@
             svgElement.setAttribute('height', '' + bounds[page - 1][1]);
             svgElement.setAttribute('data', URL + page + (isSVGZ ? '.svgz' : '.svg'));
             svgElement.setAttribute('type', 'image/svg+xml');
-            svgElement.setAttribute('class', 'page-inner');
+            svgElement.setAttribute('class', 'idrviewer-page-inner');
             svgElement.setAttribute('style', 'position: absolute');
             svgElement.addEventListener('load', svgLoadHandler);
             pages[page].appendChild(svgElement);
@@ -264,7 +264,7 @@
                 }
             }
 
-            ClassHelper.addClass(pageElement, 'page-inner');
+            ClassHelper.addClass(pageElement, 'idrviewer-page-inner');
 
             pages[page].appendChild(pageElement);
 
