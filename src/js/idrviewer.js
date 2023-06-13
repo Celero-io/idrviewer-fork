@@ -1192,7 +1192,7 @@
             }
 
             var transform = setTransform(null, 0, 0, zoom, false);
-            lastRulePosition = styleSheet.insertRule(".page-inner { \n" + transform + "\n}", styleSheet.cssRules.length);
+            lastRulePosition = styleSheet.insertRule(".idrviewer-page-inner { \n" + transform + "\n}", styleSheet.cssRules.length);
 
             for (var i = 0; i < pgCount; i++) {
                 pages[i + 1].style.width = Math.floor(bounds[i][0] * zoom) + "px";
