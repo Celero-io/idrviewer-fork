@@ -202,7 +202,7 @@
     IDRViewer.on("searchready", () => {
         IDRViewer.on("pageload", function(page) {
             if (matches.hasOwnProperty(page.page)) {
-                findSearchTermsInPage(document.querySelector("#page" + page.page));
+                findSearchTermsInPage(document.querySelector("#idrviewer-page" + page.page));
 
                 if (selectedMatch && selectedMatch.page === page.page) {
                     matches[page.page].pageHandler.setMatchDescriptorSelected(selectedMatch.index, true);
