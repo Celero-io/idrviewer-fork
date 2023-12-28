@@ -26,6 +26,10 @@
         pages = [],
         PADDING_HORIZONTAL = 0,
         PADDING_VERTICAL = 0,
+        PADDING_LEFT = 0,
+        PADDING_RIGHT = 0,
+        PADDING_TOP = 0,
+        PADDING_BOTTOM = 0,
         isSetup = false;
 
     IDR.setup = function (config) {
@@ -40,6 +44,10 @@
 
         PADDING_HORIZONTAL = config.PADDING_HORIZONTAL ? config.PADDING_HORIZONTAL : 0;
         PADDING_VERTICAL = config.PADDING_VERTICAL ? config.PADDING_VERTICAL : 0;
+        PADDING_LEFT = config.PADDING_LEFT ? config.PADDING_LEFT : 0;
+        PADDING_RIGHT = config.PADDING_RIGHT ? config.PADDING_RIGHT : 0;
+        PADDING_TOP = config.PADDING_TOP ? config.PADDING_TOP : 0;
+        PADDING_BOTTOM = config.PADDING_BOTTOM ? config.PADDING_BOTTOM : 0;
 
         // Validate starting page
         if (curPg < 1 || curPg > pgCount) {
@@ -65,6 +73,14 @@
         pageContainer.style.paddingRight = (PADDING_HORIZONTAL / 2) + "px";
         pageContainer.style.paddingTop = (PADDING_VERTICAL / 2) + "px";
         pageContainer.style.paddingBottom = (PADDING_VERTICAL / 2) + "px";
+        if(PADDING_LEFT)
+        pageContainer.style.paddingLeft = PADDING_LEFT + "px";
+        if(PADDING_RIGHT)
+        pageContainer.style.paddingRight = PADDING_RIGHT + "px";
+        if(PADDING_TOP)
+        pageContainer.style.paddingTop = PADDING_TOP + "px";
+        if(PADDING_BOTTOM)
+        pageContainer.style.paddingBottom = PADDING_BOTTOM + "px";
         contain.appendChild(pageContainer);
 
         for (var i = 1; i <= pgCount; i++) {
