@@ -1,6 +1,4 @@
-(function() {
-    "use strict";
-
+function getSearchParams(){
     let searchParams;
     if ("URLSearchParams" in window) {
         searchParams = (new URL(document.location)).searchParams;
@@ -32,6 +30,10 @@
             };
         })();
     }
+    return searchParams;
+}
+(function() {
+    "use strict";
 
     let layout;
     let continuousTimeout;
@@ -53,6 +55,7 @@
 
     let addPageToHistory = function(page) {
         try {
+            let searchParams = getSearchParams()
             searchParams.set("page", page);
             history.pushState({page: page}, null, '?' + searchParams.toString());
         } catch (ignore) { } // Chrome throws error on file:// protocol
@@ -65,6 +68,7 @@
             layout = data.layout;
 
             try {
+                let searchParams = getSearchParams()
                 searchParams.set("page", data.page);
                 history.replaceState({page: data.page}, null, '?' + searchParams.toString());
             } catch (ignore) { } // Chrome throws error on file:// protocol
