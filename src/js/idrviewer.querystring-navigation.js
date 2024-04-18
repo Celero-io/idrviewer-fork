@@ -60,7 +60,7 @@ function getSearchParams(){
             history.pushState({page: page}, null, '?' + searchParams.toString());
         } catch (ignore) { } // Chrome throws error on file:// protocol
     };
-
+    let searchParams = getSearchParams()
     IDRViewer.goToPage(parseInt(searchParams.get("page")) || 1);
 
     if (history.pushState) {
