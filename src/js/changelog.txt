@@ -1,6 +1,93 @@
 IDRViewer Changelog
 -------------------
 
+1.23.0 (22 Apr 2025)
+- Fix page backgrounds improperly being part of the screen reader tree
+- Update dev dependencies
+
+1.22.0 (11 Mar 2025)
+- Add compatibility with the URL setting and non-base64 data: URI page backgrounds
+- Update dev dependencies
+
+1.21.10 (28 Jan 2025)
+- Update dev dependencies
+
+1.21.9 (17 Dec 2024)
+- Update dev dependencies
+
+1.21.8 (12 Nov 2024)
+- Fixes for magazine layout with magazine transition enabled when not all pages in document are the same size:
+    - Fix pages flashing white during magazine transition
+    - Fix irregularly sized pages poking out from behind others
+- Fix improperly positioned pages when document is R2L and not all pages in the document are the same size
+- Remove unnecessary vendor prefixes in CSS
+- Update dev dependencies
+
+1.21.7 (01 Oct 2024)
+- Update dev dependencies
+
+1.21.6 (20 Aug 2024)
+- Fix search highlighting failing after a page has unloaded
+- Fix "next search result" button not working when there are no results from the current page to the end
+- Fix "e.pageHandler is null" console error when repeatedly clicking the "prev search button" quickly
+- Update dev dependencies
+
+1.21.5 (09 Jul 2024)
+- Update dev dependencies
+
+1.21.4 (28 May 2024)
+- Update dev dependencies
+
+1.21.3 (16 Apr 2024)
+- Update dev dependencies
+
+1.21.2 (05 Mar 2024)
+- Update dev dependencies
+
+1.21.1 (23 Jan 2024)
+- Update dev dependencies
+
+1.21.0 (12 Dec 2023)
+- Update search result highlighting implementation to support new blank fonts BuildVu feature
+- Add a hover appearance for link annotations
+- Update dev dependencies
+
+1.20.2 (31 Oct 2023)
+- Update dev dependencies
+
+1.20.1 (19 Sep 2023)
+- Allow audio RichMedia annotations to exceed the annotation width to ensure the player controls are usable
+- Load and play RichMedia annotations on the first click instead of requiring one click to load and another to play
+- Update dev dependencies
+
+1.20.0 (08 Aug 2023)
+- Add support for MPEG-2 video annotations (video will be downloaded as browsers lack playback support)
+- Fix search result highlighting obscuring highlighted text when text is transparent in SVG (OCR or shapetext modes)
+- Replace all remaining var usage with const/let
+- Update dev dependencies
+
+1.19.0 (27 Jun 2023)
+- Replace var usage with const/let
+- Allow IDRViewer to work with pages that have minified CSS (resolve font-face parsing issue)
+- Update dev dependencies
+
+1.18.0 (16 May 2023)
+- Add page loading spinners
+- Add workaround for Chromium bug #1429343 which was causing images from the next page to incorrectly become visible when magazine transitions are enabled
+- Update UIs to use SVG icons (remove the FontAwesome dependency)
+- Update UIs to use the browser theme (light or dark) by default (if available)
+- Update dev dependencies
+
+1.17.2 (04 Apr 2023)
+- Update dev dependencies
+
+1.17.1 (10 Jan 2023)
+- Update dev dependencies
+
+1.17.0 (15 Nov 2022)
+- Allow paddingX and paddingY to be configurable via the config
+- Update dev dependencies
+
 1.16.3 (04 Oct 2022)
 - Update dev dependencies
 

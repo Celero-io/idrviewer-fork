@@ -5,12 +5,12 @@ The IDRViewer is a pure HTML/JavaScript/CSS viewer designed to display PDF and O
 The IDRViewer is the component responsible for loading and displaying the pages in the web browser. It also handles functionality such as zoom, page layouts, and selection mode.
 
 ## UI Templates
-We also provide a number of user-interfaces that can be used as provided or used as a starting point for building your own user interface.
+We also provide a number of user-interfaces that can be used as provided or used as a starting point for building your own user interface. The templates are built using webpack (see NPM Tasks below).
 
-- Complete UI ([source](examples/complete/index.html), [demo](https://files.idrsolutions.com/Examples/IDRViewerUI/complete/))
-- Clean UI ([source](examples/clean/index.html), [demo](https://files.idrsolutions.com/Examples/IDRViewerUI/clean/))
-- Simple UI ([source](examples/simple/index.html), [demo](https://files.idrsolutions.com/Examples/IDRViewerUI/simple/))
-- Slideshow UI ([source](examples/slideshow/index.html), [demo](https://files.idrsolutions.com/Examples/IDRViewerUI/slideshow/))
+- Complete UI ([source](src/templates/complete/), [demo](https://files.idrsolutions.com/Examples/IDRViewerUI/complete/))
+- Clean UI ([source](src/templates/clean/), [demo](https://files.idrsolutions.com/Examples/IDRViewerUI/clean/))
+- Simple UI ([source](src/templates/simple/), [demo](https://files.idrsolutions.com/Examples/IDRViewerUI/simple/))
+- Slideshow UI ([source](src/templates/slideshow/), [demo](https://files.idrsolutions.com/Examples/IDRViewerUI/slideshow/))
 
 ## Project Structure
 ```
@@ -30,18 +30,20 @@ See [IDRViewer JavaScript API](https://support.idrsolutions.com/buildvu/api-docu
 ## Annotations JSON API
 See [Annotations JSON API](https://support.idrsolutions.com/buildvu/api-documents/annotations-json-api)
 
-## Grunt Tasks
+## NPM Tasks
 1. Install [node.js](https://nodejs.org/)
 2. Open terminal/command prompt & cd into idrviewer
 3. Run `npm install`
 4. To run the tasks, run `npm run <taskname>` where `<taskname>` is one of the following:
    - 'jshint' is for running static analysis on the JavaScript files.
    - 'playwright' is for running the automated IDRViewer tests (in /src/test/)
-   - 'webpack' is for building the UI templates to /examples/
+   - 'test' is for jshint and playwright tests
+   - 'webpack' is for building the UIs
+   - 'webpack-watch' is for building the UIs and watching for changes
 
 ## License
 
-Copyright 2022 IDRsolutions
+Copyright 2025 IDRsolutions
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
