@@ -30,10 +30,11 @@
     PADDING_RIGHT = 0,
     PADDING_TOP = 0,
     PADDING_BOTTOM = 0,
+    paddingX = 0,
+    paddingY = 0,
     minusedWidth = 0,
     minusedHeight = 0,
     isSetup = false;
-  const pages = [];
 
   IDR.setup = function (config) {
     if (!config) {
@@ -44,6 +45,7 @@
 
     bounds = config.bounds;
     pgCount = config.pagecount;
+    pages = []; // Reset pages array instead of redeclaring
 
     PADDING_HORIZONTAL = config.PADDING_HORIZONTAL
       ? config.PADDING_HORIZONTAL
@@ -54,22 +56,23 @@
     PADDING_TOP = config.PADDING_TOP ? config.PADDING_TOP : 0;
     PADDING_BOTTOM = config.PADDING_BOTTOM ? config.PADDING_BOTTOM : 0;
 
-    minusedWidth = PADDING_HORIZONTAL;
+    // Calculate paddingX and paddingY based on individual padding settings
+    paddingX = PADDING_HORIZONTAL;
     if (PADDING_LEFT && PADDING_RIGHT) {
-      minusedWidth = PADDING_LEFT + PADDING_RIGHT;
+      paddingX = PADDING_LEFT + PADDING_RIGHT;
     } else if (PADDING_LEFT) {
-      minusedWidth = PADDING_HORIZONTAL / 2 + PADDING_LEFT;
+      paddingX = PADDING_HORIZONTAL / 2 + PADDING_LEFT;
     } else if (PADDING_RIGHT) {
-      minusedWidth = PADDING_HORIZONTAL / 2 + PADDING_RIGHT;
+      paddingX = PADDING_HORIZONTAL / 2 + PADDING_RIGHT;
     }
 
-    minusedHeight = PADDING_VERTICAL;
+    paddingY = PADDING_VERTICAL;
     if (PADDING_TOP && PADDING_BOTTOM) {
-      minusedHeight = PADDING_LEFT + PADDING_RIGHT;
+      paddingY = PADDING_TOP + PADDING_BOTTOM;
     } else if (PADDING_TOP) {
-      minusedHeight = PADDING_VERTICAL / 2 + PADDING_TOP;
+      paddingY = PADDING_VERTICAL / 2 + PADDING_TOP;
     } else if (PADDING_BOTTOM) {
-      minusedHeight = PADDING_VERTICAL / 2 + PADDING_BOTTOM;
+      paddingY = PADDING_VERTICAL / 2 + PADDING_BOTTOM;
     }
 
     // Validate starting page
@@ -92,15 +95,18 @@
     pageContainer = document.createElement("div");
     pageContainer.id = "contentContainer";
     pageContainer.style.transform = "translateZ(0)";
-    pageContainer.style.paddingLeft = PADDING_HORIZONTAL / 2 + "px";
-    pageContainer.style.paddingRight = PADDING_HORIZONTAL / 2 + "px";
-    pageContainer.style.paddingTop = PADDING_VERTICAL / 2 + "px";
-    pageContainer.style.paddingBottom = PADDING_VERTICAL / 2 + "px";
-    if (PADDING_LEFT) pageContainer.style.paddingLeft = PADDING_LEFT + "px";
-    if (PADDING_RIGHT) pageContainer.style.paddingRight = PADDING_RIGHT + "px";
-    if (PADDING_TOP) pageContainer.style.paddingTop = PADDING_TOP + "px";
-    if (PADDING_BOTTOM)
-      pageContainer.style.paddingBottom = PADDING_BOTTOM + "px";
+    pageContainer.style.paddingLeft = PADDING_LEFT
+      ? PADDING_LEFT + "px"
+      : PADDING_HORIZONTAL / 2 + "px";
+    pageContainer.style.paddingRight = PADDING_RIGHT
+      ? PADDING_RIGHT + "px"
+      : PADDING_HORIZONTAL / 2 + "px";
+    pageContainer.style.paddingTop = PADDING_TOP
+      ? PADDING_TOP + "px"
+      : PADDING_VERTICAL / 2 + "px";
+    pageContainer.style.paddingBottom = PADDING_BOTTOM
+      ? PADDING_BOTTOM + "px"
+      : PADDING_VERTICAL / 2 + "px";
     contain.appendChild(pageContainer);
 
     for (let i = 1; i <= pgCount; i++) {
@@ -740,7 +746,7 @@
         const zoom = ZoomManager.getZoom();
         const pageWidth = Math.floor(bounds[curPg - 1][0] * zoom);
         let marginLeft = 0;
-        let viewPortWidth = mainContainer.clientWidth - PADDING;
+        let viewPortWidth = mainContainer.clientWidth - paddingX;
         if (viewPortWidth > pageWidth) {
           marginLeft = (viewPortWidth - pageWidth) / 2;
         } else {
@@ -749,7 +755,7 @@
 
         const pageHeight = Math.floor(bounds[curPg - 1][1] * zoom);
         let marginTop = 0;
-        let viewPortHeight = mainContainer.clientHeight - minusedHeight;
+        let viewPortHeight = mainContainer.clientHeight - paddingY;
         if (viewPortHeight > pageHeight) {
           marginTop = (viewPortHeight - pageHeight) / 2;
         } else {
@@ -924,7 +930,7 @@
         const pageWidth = 2 * Math.max(pageWidthA, pageWidthB);
         const viewPortWidth = Math.max(
           pageWidth,
-          mainContainer.clientWidth - minusedWidth
+          mainContainer.clientWidth - paddingX
         );
         pageContainer.style.width = viewPortWidth + "px";
 
@@ -1105,7 +1111,7 @@
 
         const zoom = ZoomManager.getZoom();
         mainContainer.scrollTop =
-          pages[pg].offsetTop - PADDING / 2 + offset * zoom;
+          pages[pg].offsetTop - paddingX / 2 + offset * zoom;
         LayoutManager.updatePage(pg);
         setVisiblePages();
       };
@@ -1132,7 +1138,7 @@
       Continuous.getAutoZoom = function (fitWidth) {
         if (
           Continuous.getZoomBounds().width >
-          mainContainer.clientWidth - minusedWidth
+          mainContainer.clientWidth - paddingX
         ) {
           return fitWidth;
         } else {
@@ -1427,9 +1433,9 @@
     const calculateZoomValue = function (value) {
       const zoomBounds = layout.getZoomBounds();
       const fitWidthZoom =
-        (mainContainer.clientWidth - PADDING) / zoomBounds.width;
+        (mainContainer.clientWidth - paddingX) / zoomBounds.width;
       const fitHeightZoom =
-        (mainContainer.clientHeight - PADDING) / zoomBounds.height;
+        (mainContainer.clientHeight - paddingY) / zoomBounds.height;
 
       const zoomValue = parseFloat(value);
       if (!isNaN(zoomValue)) {
