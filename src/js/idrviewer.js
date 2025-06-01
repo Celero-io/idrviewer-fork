@@ -32,6 +32,7 @@
     PADDING_BOTTOM = 0,
     paddingX = 0,
     paddingY = 0,
+    BAR_HEIGHT = 0,
     minusedWidth = 0,
     minusedHeight = 0,
     isSetup = false;
@@ -55,6 +56,7 @@
     PADDING_RIGHT = config.PADDING_RIGHT ? config.PADDING_RIGHT : 0;
     PADDING_TOP = config.PADDING_TOP ? config.PADDING_TOP : 0;
     PADDING_BOTTOM = config.PADDING_BOTTOM ? config.PADDING_BOTTOM : 0;
+    BAR_HEIGHT = config.BAR_HEIGHT ? config.BAR_HEIGHT : 0;
 
     // Calculate paddingX and paddingY based on individual padding settings
     paddingX = PADDING_HORIZONTAL;
@@ -1111,7 +1113,7 @@
 
         const zoom = ZoomManager.getZoom();
         mainContainer.scrollTop =
-          pages[pg].offsetTop - paddingX / 2 + offset * zoom;
+          pages[pg].offsetTop - paddingY + offset * zoom + BAR_HEIGHT;
         LayoutManager.updatePage(pg);
         setVisiblePages();
       };
