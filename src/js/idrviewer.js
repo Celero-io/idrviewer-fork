@@ -1,14 +1,12 @@
-(function () {
+window.createIDRViewer = function() {
   "use strict";
-
+  console.log("createIDRViewer callllllllled in idrviewer.js");
   const IDR = {
     LAYOUT_PRESENTATION: "presentation",
     LAYOUT_MAGAZINE: "magazine",
     LAYOUT_CONTINUOUS: "continuous",
-
     SELECT_SELECT: "select",
     SELECT_PAN: "pan",
-
     ZOOM_SPECIFIC: "specific",
     ZOOM_ACTUALSIZE: "actualsize",
     ZOOM_FITWIDTH: "fitwidth",
@@ -1601,7 +1599,47 @@
   } else if (typeof module === "object" && module.exports) {
     module.exports = IDR;
   }
+  
+
+  // Add a destroy method to reset all state and DOM and re-initialize
+  IDR.destroy = function() {
+    console.log("destrooooooooooooooooooooy callllllllled in idrviewer.js");
+    // Remove the main container's children
+    var mainContainer = document.getElementById("idrviewer");
+    if (mainContainer) {
+      while (mainContainer.firstChild) {
+        mainContainer.removeChild(mainContainer.firstChild);
+      }
+    }
+    // Reset all module-level variables
+    curPg = 1;
+    pgCount = 0;
+    pageContainer = undefined;
+    mainContainer = undefined;
+    layout = undefined;
+    bounds = undefined;
+    pages = [];
+    PADDING_HORIZONTAL = 0;
+    PADDING_VERTICAL = 0;
+    PADDING_LEFT = 0;
+    PADDING_RIGHT = 0;
+    PADDING_TOP = 0;
+    PADDING_BOTTOM = 0;
+    paddingX = 0;
+    paddingY = 0;
+    BAR_HEIGHT = 0;
+    minusedWidth = 0;
+    minusedHeight = 0;
+    isSetup = false;
+    // Remove the global and re-initialize
+    delete window.IDRViewer;
+    console.log("window.IDRViewer after destroy", JSON.stringify(window.IDRViewer || {}));
+    window.createIDRViewer();
+    console.log("window.IDRViewer after createIDRViewer", JSON.stringify(window.IDRViewer || {}));
+  };
   if (window) {
     window.IDRViewer = IDR;
   }
-})();
+}
+// Call it once on initial load
+window.createIDRViewer();
