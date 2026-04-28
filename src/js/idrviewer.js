@@ -273,6 +273,7 @@ window.createIDRViewer = function() {
       const newDoc = document.createElement("div");
       newDoc.innerHTML = html;
       const pageElement = newDoc.querySelector("#p" + page);
+      if (!pageElement) { callback(); return; }
       pageElement.style.margin = "0";
       pageElement.style.overflow = "hidden";
       pageElement.style.position = "absolute";
@@ -1328,6 +1329,7 @@ window.createIDRViewer = function() {
     };
 
     const updateZoom = function (value) {
+      if (!layout) return;
       LoadManager.stopLoading();
 
       zoom = calculateZoomValue(value);

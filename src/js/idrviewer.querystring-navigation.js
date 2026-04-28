@@ -74,6 +74,7 @@ function getSearchParams(){
             } catch (ignore) { } // Chrome throws error on file:// protocol
 
             window.onpopstate = function (event) {
+                if (!event.state?.page) return;
                 IDRViewer.off('pagechange', handlePageChange);
                 IDRViewer.goToPage(event.state.page);
                 IDRViewer.on('pagechange', handlePageChange);
