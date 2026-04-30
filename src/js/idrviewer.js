@@ -1356,7 +1356,7 @@ window.createIDRViewer = function() {
         }
       }
 
-      if (lastRulePosition) {
+      if (lastRulePosition && styleSheet.cssRules.length > lastRulePosition) {
         styleSheet.deleteRule(lastRulePosition);
       }
 
